@@ -1,5 +1,57 @@
 <?php
+session_start();
 
+include("connections.php");
+include("functions.php");
+
+
+if($_SERVER['REQUEST_METHOD'] ==  "POST")
+{
+    //iets is gepost
+    $password = $_POST['password'];
+    $Email = $_POST['Email'];
+    if(!empty($password) && !empty($Email))
+    {
+        $insert = $con->query("
+        INSERT INTO
+        users
+        (
+        Email,
+        password
+        ) VALUES
+        (
+        '".$con->real_escape_string($Email)."',
+        '".$con->real_escape_string($password)."'   
+        )
+        ");
+
+        //read from database
+        
+        $query = "select * from users where Email = '$Email' limit 1";
+
+
+        $result = mysqli_query($con, $query);
+        if($result)
+        {
+            if($result && mysqli_num_rows($result) > 0)
+            {
+                 $user_data = mysqli_fetch_assoc($result);
+                 
+                 if($user_data['password'] === $password)
+                 {
+                    $_SESSION['user_id'] = $user_data['user_id'];
+                    header("Location: index.php");
+                    die;
+                 }
+             }
+        }
+        
+        echo "Verkeerde Email of Wachtwoord";
+    }else
+    {
+        echo "Verkeerde Email of Wachtwoord";
+    }
+}
 
 ?>
 
