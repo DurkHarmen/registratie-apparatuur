@@ -8,15 +8,14 @@ session_start();
     if($_SERVER['REQUEST_METHOD'] ==  "POST")
     {
         //iets is gepost
-        $user_name = $_POST['user_name'];
         $password = $_POST['password'];
         $Email = $_POST['Email'];
-        if(!empty(user_name) && !empty(password) && !empty(Email) && !is_numeric($user_name))
+        if(!empty($password) && !empty($Email))
         {
 
             //save to database
             $user_id = random_num(20);
-            $query = "insert into users (user_id,user_name,password,Email) values ('$user_id','$user_name','$password','$Email')";
+            $query = "insert into users (user_id,password,Email) values ('$user_id','$password','$Email')";
 
 
             mysqli_query($query);
@@ -40,9 +39,8 @@ session_start();
 <div id="box">
     <form method="post">
         <div>Account aanmaken</div>
-        <input type="text" name="user_name"><br><br>
-        <input type="email" name="Email"><br><br>
-        <input type="password" name="password"><br><br>
+        <input type="email" placeholder="Email" name="Email"><br><br>
+        <input type="password" placeholder="Wachtwoord" name="password"><br><br>
 
         <input type="submit" value="Aanmaken"><br><br>
 

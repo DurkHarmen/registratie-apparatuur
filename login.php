@@ -13,9 +13,8 @@
 <div id="box">
     <form method="post">
         <div>Login</div>
-        <input type="text" name="user_name"><br><br>
-        <input type="email" name="Email"><br><br>
-        <input type="password" name="password"><br><br>
+        <input type="email" placeholder="Email" name="Email"><br><br>
+        <input type="password" placeholder="Wachtwoord" name="password"><br><br>
 
         <input type="submit" value="Login"><br><br>
 
