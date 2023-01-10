@@ -7,7 +7,7 @@ function check_login($con)
     {
        
         $id = $_SESSION['user_id'];
-        mysqli_query($conn, "select * from users where user_id = '$id' limit 1");
+        mysqli_query($con, "select * from users where user_id = '$id' limit 1");
 
         $result = mysqli_query($con,$query);
         if($result && mysqli_num_rows($result) > 0)
@@ -36,4 +36,21 @@ function random_num($lenght)
     }
 
     return $text;
+}
+function validate($password, $Email)
+{
+    $errors = array();
+    
+    // validatieregels voor het wachtwoord
+    if(strlen($password) < 2)
+        $errors['wachtwoord'] = 'U heeft geen wachtwoord ingevuld.';
+    
+    // validatieregels voor het mailadres
+    if(!strlen($Email))
+        $errors['email'] = 'U heeft geen email adres ingevuld.';
+    else if(!filter_var($Email, FILTER_VALIDATE_EMAIL))
+        $errors['email'] = 'U heeft een ongeldig email adres ingevuld.';
+    
+    // geef de array met foutmeldingen terug
+    return $errors;
 }
