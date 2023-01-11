@@ -60,18 +60,28 @@ if($_SERVER['REQUEST_METHOD'] ==  "POST")
 <html>
 <head>
     <title>Inloggen</title>
+    <style>
+.wrapper{
+    padding-left: 40%;
+    padding-top: 10%;
+
+
+        }
+    </style>
 </head>
 <body>
-<div id="box">
-    <form method="post">
-        <div>Login</div>
-        <input type="email" placeholder="Email" name="Email"><br><br>
-        <input type="password" placeholder="Wachtwoord" name="password"><br><br>
+<div class="wrapper">
+    <div id="box">
+        <form method="post">
+            <div>Login</div>
+            <input type="email" placeholder="Email" name="Email"><br><br>
+            <input type="password" placeholder="Wachtwoord" name="password"><br><br>
 
-        <input type="submit" value="Login"><br><br>
+            <input type="submit" value="Login"><br><br>
 
-        <a href="signup.php">Klik om een account aan te maken</a><br><br>
-    </form>
+            <a href="signup.php">Klik om een account aan te maken</a><br><br>
+        </form>
+    </div>
 </div>
 </body>
 </html>
