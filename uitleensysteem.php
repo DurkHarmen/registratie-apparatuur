@@ -68,6 +68,7 @@
                     <option value="monitor 3">monitor 3</option>
                     <option value="monitor 4">monitot</option>
                     <br></br>
+                </select>
                     
                     <label for="product">lader</label>
                 <select name="product" id="lader">
@@ -76,6 +77,7 @@
                     <option value="monitor 3">lader 3</option>
                     <option value="monitor 4">lader 4</option>
                     <br></br>
+                </select>
 
                     <label for="product">laptop</label>
                 <select name="product" id="laptop">
@@ -84,6 +86,7 @@
                     <option value="laptop 3">laptop 3</option>
                     <option value="laptop 4">laptop 4</option>
                     <br></br>
+                </select>
                     
            
            
