@@ -49,7 +49,7 @@ session_start();
 <style>
 .pagina{
     padding-left: 40%;
-    padding-top: 0%;
+    padding-top: 10%;
 
 
         }
