@@ -1,10 +1,18 @@
+<?php 
+session_start();
+
+include("connections.php");
+include("functions.php");
+
+$user_data = check_login($con);
+
+?>
 <html>
 <doc html>
     
     <nav>
         <ul>
-          <li><a href="login.php">Login</a></li>
-          <li><a href="">Uitloggen</a></li>
+          <li><a href="logout.php">Uitloggen</a></li>
         </ul>
         <form>
           <input type="text" placeholder="Search...">
