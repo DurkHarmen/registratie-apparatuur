@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,42 +52,38 @@
                 <input type="email" name="email" id="email" required />
             </div>
             <div class="form-field">
-                <label for="product">camera
+                <label for="product">product
                 </label>
-                <select name="product" id="camera">
-                    <option value="panasonic">panasonic</option>
-                    <option value="cannon">cannon</option>
-                    <option value="sony">sony</option>
-                    <option value="gopro">gopro</option>
-                </select>
-            <br></br>
-            <label for="product">monitor
-                </label>
-                <select name="product" id="monitor">
-                    <option value="monitor 1">monitor 1</option>
-                    <option value="monitor 2">monitor 2</option>
-                    <option value="monitor 3">monitor 3</option>
-                    <option value="monitor 4">monitot</option>
-                    <br></br>
-                </select>
-                    
-                    <label for="product">lader</label>
-                <select name="product" id="lader">
-                    <option value="monitor 1">lader 1</option>
-                    <option value="monitor 2">lader 2</option>
-                    <option value="monitor 3">lader 3</option>
-                    <option value="monitor 4">lader 4</option>
-                    <br></br>
-                </select>
+                <?php
+                $conn = mysqli_connect("localhost","root","root","uitleen_systeem");
 
-                    <label for="product">laptop</label>
-                <select name="product" id="laptop">
-                    <option value="laptop 1">laptop 1</option>
-                    <option value="laptop 2">laptop 2</option>
-                    <option value="laptop 3">laptop 3</option>
-                    <option value="laptop 4">laptop 4</option>
-                    <br></br>
-                </select>
+                //check if the connection was successful
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+                
+                $sql = "SELECT ID, naam, serienummer, model, type, beschikbaarheid FROM producten";
+$result = mysqli_query($conn, $sql);
+
+
+if (mysqli_num_rows($result) > 0) {
+    //start creating the dropdown menu
+    echo '<select name="product">';
+    //loop through the results
+    while($row = mysqli_fetch_assoc($result)) {
+        echo '<option>' . " -naam: "  . $row['naam']. " -serienummer: " .$row['serienummer']. " -model: ".$row['model']. " -type:" . $row['type']. '</option>';
+    }
+    //end creating the dropdown menu
+    echo '</select>';
+} else {
+    echo "0 results";
+}
+
+//close the connection
+
+?>
+
+            
                     
            
            
@@ -107,12 +104,13 @@
     <?php
      
      $conn = new mysqli("localhost", "root", "root", "uitleen_systeem");
+    
 
       if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());
-      }
-  
-    
+        }
+
+        
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = array(
             "naam" => $_POST['naam'],
