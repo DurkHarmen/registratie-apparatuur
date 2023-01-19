@@ -1,0 +1,25 @@
+<?php
+    // Connect to the database
+    $conn = mysqli_connect("hostname", "username", "password", "database_name");
+
+    // Retrieve data from the database
+    $result = mysqli_query($conn, "SELECT * FROM table_name");
+
+    // Display data in an HTML table
+    echo "<table>";
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . $row['column1'] . "</td>";
+        echo "<td>" . $row['column2'] . "</td>";
+        echo "<td>" . $row['column3'] . "</td>";
+        echo "<td> <form method='post' action='delete.php'>
+               <input type='hidden' name='id' value='".$row['id']."'>
+               <input type='submit' value='Delete'>
+               </form> </td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+
+    // Close the database connection
+    mysqli_close($conn);
+?>

@@ -127,5 +127,6 @@ if (mysqli_num_rows($result) > 0) {
         echo '<p>U heeft het product ' . $data['product'] . ' geleend op ' . $data['datumUitleen'] . ', en moet teruggebracht worden op ' . $data['datumRetour'] . '.</p>';
         echo '<p>We hebben een bevestigingsmail verzonden naar ' . $data['email'] . '.</p>';
     }
-    
+    mysqli_close($conn);
+   
 ?>
