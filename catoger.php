@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #dddddd;
+    text-align: center; 
+}
+
+form {
+    display: inline-block;
+}
+
+input[type='submit'] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type='submit']:hover {
+    background-color: #45a049;
+}
+
+        </style>
+</head>
+<body>
+    
+
+
+    
+</body>
+</html>
+<?php
+$conn = mysqli_connect("localhost","root","root","uitleen_systeem");
+
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+     $result = mysqli_query($conn, "SELECT  ID, naam, serienummer, model, type, beschikbaarheid FROM apparatuur");
+     echo "<table>";
+     echo "<tr>";
+    
+     echo "<th>naam</th>";
+     echo "<th>serienummer</th>";
+     echo "<th>model</th>";
+     echo "<th>type</th>";
+     echo "<th>beschikbaarheid</th>";
+     echo "</tr>";
+     
+     while($row = mysqli_fetch_assoc($result)) {
+         echo "<tr>";
+       
+         echo "<td>" . $row['naam'] . "</td>";
+         echo "<td>" . $row['serienummer'] . "</td>";
+         echo "<td>" . $row['model'] . "</td>";
+         echo "<td>" . $row['type'] . "</td>";
+         echo "<td>"  . $row['beschikbaarheid'] . "</td>";
+         
+         echo "</tr>";
+     }
+     echo "</table>";
+ 
+     mysqli_close($conn);
+ ?>
