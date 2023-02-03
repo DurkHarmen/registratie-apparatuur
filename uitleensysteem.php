@@ -57,29 +57,30 @@
                 <?php
                 $conn = mysqli_connect("localhost","root","root","uitleen_systeem");
 
-                //check if the connection was successful
+               
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
                 
-                $sql = "SELECT ID, naam, serienummer, model, type, beschikbaarheid FROM producten";
+                $sql = "SELECT   naam, serienummer, model, type, beschikbaarheid, ID FROM producten WHERE ID NOT IN (SELECT ProductID FROM uitleningen)";
 $result = mysqli_query($conn, $sql);
 
 
 if (mysqli_num_rows($result) > 0) {
-    //start creating the dropdown menu
-    echo '<select name="product">';
-    //loop through the results
+ 
+    echo '<select name="ProductID">';
+
     while($row = mysqli_fetch_assoc($result)) {
-        echo '<option>' . " -naam: "  . $row['naam']. " -serienummer: " .$row['serienummer']. " -model: ".$row['model']. " -type:" . $row['type']. '</option>';
+       //echo '<option>' . " -naam: "  . $row['naam']. " -serienummer: " .$row['serienummer']. " -model: ".$row['model']. " -type:" . $row['type']. '</option>';
+        echo '<option value=' . $row['ID']. '>' . " -naam: "  . $row['naam']. " -serienummer: " .$row['serienummer']. " -model: ".$row['model']. " -type:" . $row['type']. '</option>';
     }
-    //end creating the dropdown menu
+  
     echo '</select>';
 } else {
     echo "0 results";
 }
 
-//close the connection
+
 
 ?>
 
@@ -113,14 +114,19 @@ if (mysqli_num_rows($result) > 0) {
         
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = array(
+            "ProductID" => $_POST['ProductID'],
             "naam" => $_POST['naam'],
             "email" => $_POST['email'],
-            "product" => $_POST['product'],
+            
             "datumUitleen" => $_POST['datumUitleen'],
-            "datumRetour" => $_POST['datumRetour']
+            "datumRetour" => $_POST['datumRetour'],
+            
         );
 
-        $sql = "INSERT INTO uitleningen (naam, email, product, datumUitleen, datumRetour) VALUES ('".$data['naam']."', '".$data['email']."', '".$data['product']."', '".$data['datumUitleen']."', '".$data['datumRetour']."')";
+        $sql = "INSERT INTO uitleningen (ProductID, naam, email, datumUitleen, datumRetour) VALUES ('".$data['ProductID']."','".$data['naam']."', '".$data['email']."',  '".$data['datumUitleen']."', '".$data['datumRetour']."')";
+        
+        echo $sql;
+        
         mysqli_query($conn, $sql);
 
         echo '<h2>Bedankt voor het lenen van het product, ' . $data['naam'] . '!</h2>';
